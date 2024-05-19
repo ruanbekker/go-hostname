@@ -22,3 +22,20 @@ Make a request using curl:
 $ curl http://localhost:8000
 Hostname: d677c0022240
 ```
+
+## Build
+
+Prepare a multi-arch build environment:
+
+```bash
+docker buildx create --use
+docker buildx inspect --bootstrap
+```
+
+Build and push version to docker hub:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 --build-arg version=0.2.1 -t ruanbekker/hostname:0.2.1   --push .
+docker buildx build --platform linux/amd64,linux/arm64 --build-arg version=0.2.1 -t ruanbekker/hostname:latest  --push .
+```
+
